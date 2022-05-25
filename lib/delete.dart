@@ -1,0 +1,26 @@
+import 'package:flutter/material.dart';
+import 'package:query/main.dart';
+
+class Delete extends StatefulWidget {
+
+
+  @override
+  State<Delete> createState() => _DeleteState();
+}
+
+class _DeleteState extends State<Delete> {
+  TextEditingController name=new TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(children: [
+        TextField(controller: name,decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'name'),),
+        FlatButton(onPressed: () async {
+          String a=name.text.toString();
+          await mydb.delete("phonebook",where:"name=?",whereArgs:[a]);
+        }, child: Text('delete'))
+      ],),
+    );
+  }
+}
